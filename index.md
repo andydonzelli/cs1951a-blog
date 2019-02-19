@@ -1,9 +1,11 @@
+This website is available at [https://andydonzelli.github.io/cs1951a-blog/](https://andydonzelli.github.io/cs1951a-blog/)
+
 ## Pre-proposal hello!
 
 Hello from the pre-proposal.
 
 
-# Quick intro to managing this website
+# Quick intro to managing this site
 
 You can use the [editor on GitHub](https://github.com/andydonzelli/cs1951a-blog/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
