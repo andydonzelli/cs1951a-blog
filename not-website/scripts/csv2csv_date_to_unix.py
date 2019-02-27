@@ -1,3 +1,7 @@
+''' This script takes a CSV file that includes a timestamp column, and creates a new CSV file
+which instead has a unix_time column.
+'''
+
 import datetime
 import time
 import csv
