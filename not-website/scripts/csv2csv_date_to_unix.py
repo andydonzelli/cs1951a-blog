@@ -8,7 +8,7 @@ import csv
 from argparse import ArgumentParser
 
 ''' SYNOPSIS
-        python date_to_unix.py [-i input file] [-o output file]
+        python csv2csv_date_to_unix.py [-i input file] [-o output file]
 '''
 parser = ArgumentParser()
 parser.add_argument("-i", "--infile", dest="infile", help="Input .csv file")
