@@ -1,0 +1,6 @@
+# Ignore folder-management files
+.DS_Store
+
+# Ignore any database or CSV file.
+.db
+.csv
