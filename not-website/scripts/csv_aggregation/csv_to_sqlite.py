@@ -38,6 +38,8 @@ db.commit()
 id_count = 0
 num_rows = GetNumRows(args.csvfile)
 print("CSV file contains %d rows... this may take a while!")
+print("Note: this thing takes a while to start up, probably because of memory allocation."
+      " If you don't see anything else within 2 minutes, you can start being concerned.")
 
 csv_data = csv.reader(open(args.csvfile))
 next(csv_data)  # Skip header.
