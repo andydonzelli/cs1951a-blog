@@ -2,7 +2,7 @@
 
 ''' Creates 'nyc_zip_code_info.csv' a CSV file with headers ['ZIP_CODE', 'LAT', 'LNG', 'BOROUGH', 'NEIGHBOURHOOD'] in same directory.
 
-    Requries the following files in same directory as script:
+    Requires the following files in same directory as script:
         - 'opendatasoft_ny_zip_code_info.csv' from https://public.opendatasoft.com/explore/dataset/us-zip-code-latitude-and-longitude/download/?format=csv&refine.state=NY&timezone=America/New_York&use_labels_for_header=true
         - 'us_zip_codes.csv' from https://gist.github.com/abatko/ee7b24db82a6f50cfce02afafa1dfd1e
 '''
@@ -15,6 +15,7 @@ import csv
 
 def main():
     scrape()
+
 
 def scrape():
     page_link = 'https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm'
@@ -48,8 +49,7 @@ def scrape():
             zips_to_neighbourhoods_dict[zip_code] = current_neighbourhood
 
     zips_to_lats_dict, zips_to_longs_dict = get_nyc_zip_coordinates(zips)
-    create_output_csv(zips, zips_to_lats_dict, zips_to_longs_dict,
-                      zips_to_boroughs_dict, zips_to_neighbourhoods_dict)
+    create_output_csv(zips, zips_to_lats_dict, zips_to_longs_dict, zips_to_boroughs_dict, zips_to_neighbourhoods_dict)
 
 
 def get_nyc_zip_coordinates(zips):
