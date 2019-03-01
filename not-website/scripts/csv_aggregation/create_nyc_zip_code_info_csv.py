@@ -59,11 +59,11 @@ def get_nyc_zip_coordinates(zips):
     us_zips_longs_dict_secondary = None
 
     with open('opendatasoft_ny_zip_code_info.csv', 'r') as csv_file:
-        reader_primary = csv.reader(csv_file, delimiter=';')
-        us_zips_lats_dict_primary = {rows[0]: rows[3] for rows in reader_primary}
+        reader = csv.reader(csv_file, delimiter=';')
+        us_zips_lats_dict_primary = {rows[0]: rows[3] for rows in reader}
     with open('opendatasoft_ny_zip_code_info.csv', 'r') as csv_file:
-        reader_primary = csv.reader(csv_file, delimiter=';')
-        us_zips_longs_dict_primary = {rows[0]: rows[4] for rows in reader_primary}
+        reader = csv.reader(csv_file, delimiter=';')
+        us_zips_longs_dict_primary = {rows[0]: rows[4] for rows in reader}
     with open('us_zip_codes.csv', 'r') as csv_file:
         reader = csv.reader(csv_file, delimiter=',')
         us_zips_lats_dict_secondary = {rows[0]: rows[1] for rows in reader}
