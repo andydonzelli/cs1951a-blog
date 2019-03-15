@@ -5,6 +5,11 @@ import numpy as np
 import pandas as pd
 
 
+"""
+SYNOPSIS
+python borough_visualizations.py --file [.csv files]
+"""
+
 parser = ArgumentParser()
 parser.add_argument('--file',nargs='+',dest="files")
 args = parser.parse_args()
