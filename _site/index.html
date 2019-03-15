@@ -81,7 +81,7 @@
 <p>For our initial link of investigation, we will be exploring the relationships between the volume of ride services in different boroughs within NYC. This general question will allow us to construct the infrastructure for our data analysis so that we may build upon it with additional investigations.</p>
 
 <h3 id="data-collection-and-cleaning">Data Collection and Cleaning</h3>
-<p>Unfortunately, there is not much publically available NYC trip data for two main ride services we wanted to look at, Lyft and Uber, unlike the huge amounts of Taxi ride data available. To ensure we can make fair comparisons between all the ride services we have pruned the ride data from all of our ride services to the two-month time range of the trip data available for Lyft. This two-month overlap of data between all the ride services data is August and September 2014.</p>
+<p>Unfortunately, there is little public trip data available for the two main ride services we wanted to look at, Lyft and Uber, unlike the huge amounts of Taxi ride data available. To ensure we can make fair comparisons between all the ride services we have pruned the ride data from all of our ride services to the two-month time range of the trip data available for Lyft. This two-month overlap of data between all the ride services data is August and September 2014.</p>
 
 <p>Similarly, the specificity and organization of the raw trip data for each of the ride service dataset also varied drastically between the datasets for each ride service. To overcome this, we merged all the ride data for the two months from all the datasets into a single rides CSV containing the data that was either present or was inferrable from all of our datasets. This <code class="highlighter-rouge">all_processed_rides.csv</code> included the following information of each trip: its Unix timestamp, the ride service’s name, and the latitude and longitude of the start position of the ride.</p>
 
@@ -90,7 +90,7 @@
 <h3 id="location">Location</h3>
 <p>For our first question, we needed to associate each of these rides to an area within New York. To accomplish this, we first scraped a table from <a href="https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm">health.gov.ny</a> to retrieve a list of boroughs, and then associated zip codes and neighborhoods to these by using Python’s <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/"><strong>Beautiful Soup</strong> package</a>.</p>
 
-<p>After that, we looked into using an online reverse geocoding API such as <a href="https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse">Google Maps Geocoding-Reverse</a> to retrieve a zip code from each of the rides location coordinates. All of these online API’s had rate limits in the 1000’s per day for free and even in their most expensive tiers still would not have supported the 32 million rides we needed to look up.</p>
+<p>After that, we looked into using an online reverse geocoding API such as <a href="https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse">Google Maps Geocoding-Reverse</a> to retrieve a zip code from each of the rides location coordinates. All of these online APIs had rate limits in the 1000’s per day for free and even in their most expensive tiers still would not have supported the 32 million rides we needed to look up.</p>
 
 <p>In the end, after trying out a lot of offline <a href="https://en.wikipedia.org/wiki/Reverse_geocoding"><strong>reverse geocoding</strong></a> libraries most of which were not accurate at all, we found this Python package called <a href="https://pypi.org/project/uszipcode/"><strong>uszipcode</strong></a> that had an extremely robust offline zip code search engine that seemed to be perfect for our needs. The only issue was that it took around 10 seconds to obtain a zip code for 500 rides… With our ~32 million trips it meant that it would take approximately 180 hours to get a zip code for each ride, way too long.</p>
 
@@ -116,6 +116,10 @@
 |Uber           |1427360|
 |Lyft           |232764|
 |Citi Bikes     |1554816| -->
+
+<p>Even with elementary processing, we can see that the aggregated data shows some interesting travel habits. Manhattan clearly dominates the use of these services, with 80% of the rides originating in that borough. Looking at the proportion of each service used in each area we see substantial differences: Green Taxis were used extensively in the Bronx (84% of rides in that area) and Brooklyn (47%), while relatively little in Manhattan (3.6%). Conversely, the Citi bikes were used exclusively in Manhattan and Brooklyn.</p>
+
+<p>This very simple analysis of our data is meant as a proof-of-concept of work to come. Stay tuned to discover more exciting relationships that may surprise you even more!</p>
 
 <h3 id="next-steps">Next Steps</h3>
 
