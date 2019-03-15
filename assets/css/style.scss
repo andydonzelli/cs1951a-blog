@@ -2,3 +2,109 @@
 ---
 
 @import "{{ site.theme }}";
+
+// BELOW ARE CUSTOM CSS DESCRIPTIONS, (overriding theme defaults)
+
+.inner { 
+    position: relative; 
+    max-width: 640px; 
+    padding: 5px 10px; 
+    margin: 0 auto;
+}
+
+footer {
+    line-height: 0.9;
+}
+
+// Small-screen styles are also overridden by this.
+#project_title { 
+    font-size: 44px;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+// Small-screen styles are also overridden by this.
+#project_tagline { 
+    color: #aaa; 
+    font-size: 16px; 
+    font-weight: 300; 
+    background: none; 
+    text-shadow: #111 0px 0px 10px; 
+}
+
+.fa-lyft, .fa-uber, .fa-taxi, .fa-bicycle { 
+    font-weight: normal;
+}
+
+// This block and the next align the logos
+.fa-lyft {
+    padding-left: 4px;
+    padding-right: 5px;
+    color: rgb(255, 20, 187);
+}
+.fa-bicycle {
+    padding-left: 1px;
+    color: rgb(0,200,252);
+}
+.fa-taxi {
+    color: rgb(255,210,83);
+}
+.fa-uber {
+    color: #aaa;
+}
+
+
+.subheader {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    margin: 10%;
+    float: left;
+    height: 200px;
+}
+.left-subheader {
+    text-align: center;
+    float: left;
+    width: 18%;
+}
+.right-subheader {
+    padding-left: 5%;
+    float: left;
+    width: 75%;
+}
+
+#containerTitle h1,
+#containerTitle p {
+    display: inline;
+    vertical-align: top;
+    font-size: 16px;
+    line-height: 28px;
+}
+
+h3 {
+    padding-top: 40px;
+    font-size: 24px;
+}
+
+img { 
+    width: 100%;
+    box-shadow: none;
+}
+
+img[alt=aws] {
+    width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img[alt=db] {
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+

@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,maximum-scale=2">
     <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/web_media/favicon-taxi.ico?">
 {% seo %}
   </head>
 
@@ -15,8 +16,22 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <h1 id="project_title">Visualizing 🚖, 🚲, and ☔️ in NYC</h1>
-          <h2 id="project_tagline">A cs1951a Blog</h2>
+          <h1 id="project_title">Ride Services in NYC</h1>
+
+          <div id="subheader" class="container">
+          <div class='left-subheader'>
+          <h2>
+            <i class="fas fa-taxi fa-lg"></i>
+            <i class="fab fa-lyft fa-lg"></i>
+            <i class="fab fa-uber fa-lg"></i>
+            <i class="fas fa-bicycle fa-lg"></i>
+          </h2>
+          </div>
+          <div class='right-subheader'>
+          <h2 id="project_tagline">Welcome to our cs1951a: Data Science Blog! We highlight interesting parts of our process towards understanding the hidden links between the use of ride services and various aspects of the local environment, particularly in New York City. Made proudly at Brown University.</h2>
+          </div>
+          </div>
+          <div style="clear: both;"></div>
 
           {% if site.show_downloads %}
             <section id="downloads">
@@ -37,11 +52,10 @@
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        {% if site.github.is_project_page %}
-        <p class="copyright">This blog highlights visualizations and analyses created as part of cs1951a: Data Science, at Brown University.</p>
-        <p> It is maintained by Andy Donzelli, Troy Moo Penn, Shash Sinha, and Matt Slivinski</p>
-        {% endif %}
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+        <center>
+        <p class="copyright">Andy Donzelli, Troy Moo Penn, Shash Sinha, and Matt Slivinski.</p>
+        <p style="color:#aaa"> All rights reserved.</p>
+        </center>
       </footer>
     </div>
 
