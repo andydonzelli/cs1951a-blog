@@ -93,6 +93,18 @@ img {
     box-shadow: none;
 }
 
-img[alt=db] {
-    width: 80%;
+img[alt=aws] {
+    width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+img[alt=db] {
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+

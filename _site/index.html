@@ -5,7 +5,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,maximum-scale=2">
-    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/style.css?v=b495036c17b9c91ab28c8064ad08fe807a03220e">
+    <link rel="stylesheet" type="text/css" media="screen" href="/cs1951a-blog/assets/css/style.css?v=b935df0b823f8ecd06c0e7dfd25b1c5c61d43f65">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="assets/web_media/favicon-taxi.ico?">
 <!-- Begin Jekyll SEO tag v2.5.0 -->
@@ -13,11 +13,11 @@
 <meta name="generator" content="Jekyll v3.7.4" />
 <meta property="og:title" content="cs1951a-blog" />
 <meta property="og:locale" content="en_US" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<link rel="canonical" href="http://localhost:4000/cs1951a-blog/" />
+<meta property="og:url" content="http://localhost:4000/cs1951a-blog/" />
 <meta property="og:site_name" content="cs1951a-blog" />
 <script type="application/ld+json">
-{"headline":"cs1951a-blog","url":"http://localhost:4000/","name":"cs1951a-blog","@type":"WebSite","@context":"http://schema.org"}</script>
+{"name":"cs1951a-blog","@type":"WebSite","url":"http://localhost:4000/cs1951a-blog/","headline":"cs1951a-blog","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -96,7 +96,8 @@
 
 <p>To speed up the zip code retrieval we first tried to parallelize the python script locally however we quickly realized that our personal machines were not built for these type of workloads and putting them under near 100% load for at least 72 hours was probably not a good idea. We therefore decided to use an Amazon Web Services (AWS) <a href="https://aws.amazon.com/ec2/"><strong>Elastic Compute Cloud (EC2)</strong></a> instance instead to increase our parallel processing potential significantly, see below for a screenshot of the communication from Amazon telling our group member that he was now able to use a 64GB ram and 16 core CPU instance that is not enabled by default on basically any AWS account.</p>
 
-<p><img src="/assets/web_media/AWS_email.png" alt="AWS Limit Increase" /></p>
+<!-- <p align="center"><img src="assets/web_media/AWS_email.png" width="80%"/></p> -->
+<p><img src="/cs1951a-blog/assets/web_media/AWS_email.png" alt="aws" /></p>
 
 <p>After about 12 hours on this proverbial “beast of a machine” (we had to restart the script a couple of times) all 32,209,351 rides in our CSV had a ZIP code associated with them. The next step was translating both our rides CSV and locations CSV into a database for analysis.</p>
 
@@ -106,7 +107,7 @@
 
 <p>For the time being, we are storing our data in an SQLite database, the schema of which is shown below. We will be transitioning our data onto a MySQL database soon, however, to more easily produce interactive visualizations for future blog posts.</p>
 
-<p><img src="/assets/web_media/db_schema.png" alt="Database Schema" /></p>
+<p><img src="/cs1951a-blog/assets/web_media/db_schema.png" alt="db" /></p>
 
 <h3 id="data-analysis-so-far">Data Analysis… So Far</h3>
 
