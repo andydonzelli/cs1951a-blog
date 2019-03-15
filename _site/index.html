@@ -89,9 +89,9 @@
 
 <p>After that, we looked into using an online reverse geocoding API such as <a href="https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse">Google Maps Geocoding-Reverse</a> to retrieve a zip code from each of the rides location coordinates. All of these online API’s had rate limits in the 1000’s per day for free and even in their most expensive tiers still would not have supported the 32 million rides we needed to look up.</p>
 
-<p>In the end, after trying out a lot of offline <strong>[reverse geocoding]</strong>(https://en.wikipedia.org/wiki/Reverse_geocoding) libraries most of which were not accurate at all, we found this Python package called <strong>[uszipcode]</strong>(https://pypi.org/project/uszipcode/) that had an extremely robust offline zip code search engine that seemed to be perfect for our needs. The only issue was that it took around 10 seconds to obtain a zip code for 500 rides… With our ~32 million trips it meant that it would take approximately 180 hours to get a zip code for each ride, way too long.</p>
+<p>In the end, after trying out a lot of offline <a href="https://en.wikipedia.org/wiki/Reverse_geocoding"><strong>reverse geocoding</strong></a> libraries most of which were not accurate at all, we found this Python package called <a href="https://pypi.org/project/uszipcode/"><strong>uszipcode</strong></a> that had an extremely robust offline zip code search engine that seemed to be perfect for our needs. The only issue was that it took around 10 seconds to obtain a zip code for 500 rides… With our ~32 million trips it meant that it would take approximately 180 hours to get a zip code for each ride, way too long.</p>
 
-<p>To speed up the zip code retrieval we first tried to parallelize the python script locally however we quickly realized that our personal machines were not built for these type of workloads and putting them under near 100% load for at least 72 hours was probably not a good idea. We, therefore, decided to use an Amazon Web Services (AWS) <strong>[Elastic Compute Cloud (EC2)]</strong>(https://aws.amazon.com/ec2/) instance instead to increase our parallel processing potential significantly, see below for a screenshot of the communication from Amazon telling our group member that he was now able to use a 64GB ram and 16 core CPU instance that is not enabled by default on basically any AWS account.</p>
+<p>To speed up the zip code retrieval we first tried to parallelize the python script locally however we quickly realized that our personal machines were not built for these type of workloads and putting them under near 100% load for at least 72 hours was probably not a good idea. We, therefore, decided to use an Amazon Web Services (AWS) <a href="https://aws.amazon.com/ec2/"><strong>Elastic Compute Cloud (EC2)</strong></a> instance instead to increase our parallel processing potential significantly, see below for a screenshot of the communication from Amazon telling our group member that he was now able to use a 64GB ram and 16 core CPU instance that is not enabled by default on basically any AWS account.</p>
 
 <p><img src="/assets/web_media/AWS_email.png" alt="AWS Limit Increase" /></p>
 
@@ -105,30 +105,12 @@
 
 <h3 id="data-analysis-so-far">Data Analysis… So Far</h3>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Yellow Taxi</td>
-      <td>19159254</td>
-    </tr>
-    <tr>
-      <td>Green Taxi</td>
-      <td>2634811</td>
-    </tr>
-    <tr>
-      <td>Uber</td>
-      <td>1427360</td>
-    </tr>
-    <tr>
-      <td>Lyft</td>
-      <td>232764</td>
-    </tr>
-    <tr>
-      <td>Citi Bikes</td>
-      <td>1554816</td>
-    </tr>
-  </tbody>
-</table>
+<!-- |---------------|-----: |
+|Yellow Taxi    |19159254|
+|Green Taxi     |2634811|
+|Uber           |1427360|
+|Lyft           |232764|
+|Citi Bikes     |1554816| -->
 
 <h3 id="next-steps">Next Steps</h3>
 

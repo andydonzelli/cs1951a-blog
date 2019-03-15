@@ -285,3 +285,5 @@ footer { line-height: 0.9; }
 .right-subheader { padding-left: 5%; float: left; width: 75%; }
 
 h3 { padding-top: 40px; font-size: 24px; }
+
+img { width: 100%; box-shadow: none; }
