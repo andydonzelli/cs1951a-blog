@@ -4,3 +4,6 @@
 # Ignore any database or CSV file.
 .db
 .csv
+
+# Ignore anything in the locally-generated _site/ directory.
+/_site
