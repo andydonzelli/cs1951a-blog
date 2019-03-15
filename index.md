@@ -66,7 +66,7 @@ The final rides table only has 25,009,005 rides. The reason for this being that 
 
 For the time being, we are storing our data in an SQLite database, the schema of which is shown below. We will be transitioning our data onto a MySQL database soon, however, to more easily produce interactive visualizations for future blog posts.
 
-<p align="center"><img src="assets/web_media/db_schema.png" width="40%"/></p>
+<p align="center"><img src="assets/web_media/db_schema.png" width="100px"/></p>
 
 
 
