@@ -53,7 +53,7 @@ In the end, after trying out a lot of offline [**reverse geocoding**](https://en
 
 To speed up the zip code retrieval we first tried to parallelize the python script locally however we quickly realized that our personal machines were not built for these type of workloads and putting them under near 100% load for at least 72 hours was probably not a good idea. We therefore decided to use an Amazon Web Services (AWS) [**Elastic Compute Cloud (EC2)**](https://aws.amazon.com/ec2/) instance instead to increase our parallel processing potential significantly, see below for a screenshot of the communication from Amazon telling our group member that he was now able to use a 64GB ram and 16 core CPU instance that is not enabled by default on basically any AWS account.
 
-![AWS Limit Increase](/assets/web_media/AWS_email.png)
+<p align="center"><img src="assets/web_media/AWS_email.png" width="80%"/></p>
 
 After about 12 hours on this proverbial "beast of a machine" (we had to restart the script a couple of times) all 32,209,351 rides in our CSV had a ZIP code associated with them. The next step was translating both our rides CSV and locations CSV into a database for analysis.
 
@@ -66,7 +66,7 @@ The final rides table only has 25,009,005 rides. The reason for this being that 
 
 For the time being, we are storing our data in an SQLite database, the schema of which is shown below. We will be transitioning our data onto a MySQL database soon, however, to more easily produce interactive visualizations for future blog posts.
 
-![Database Schema](/assets/web_media/db_schema.png)
+<p align="center"><img src="assets/web_media/db_schema.png" width="50%"/></p>
 
 
 
