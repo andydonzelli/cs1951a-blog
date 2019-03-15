@@ -25,7 +25,7 @@ N= 5
 ind = np.arange(N)
 width = 0.4
 boroughs = ["Manhattan","Queens","Staten Island","Brooklyn","Bronx"]
-companies = ["Uber","Lyft","Citi","Yellow Taxi","Green Taxi"]
+companies = ["Lyft","Uber","Citi","Green Taxi","Yellow Taxi"]
 
 uber = np.array(cmp_borough_rides_count["Uber"])
 lyft = np.array(cmp_borough_rides_count["Lyft"])
@@ -60,9 +60,9 @@ bor_totals = data.sum(axis=1).values
 cmp_totals= np.append(cmp_totals,ttotal)
 
 
-celldata = np.hstack((np.transpose(data.values),bor_totals.reshape(bor_totals.shape[0],1)))
+celldata = np.hstack((data.values,bor_totals.reshape(bor_totals.shape[0],1)))
 celldata = np.vstack((celldata,cmp_totals))
-table= plt.table(colLabels=boroughs + ["Total"],rowLabels=companies+["Total"],
+table= plt.table(colLabels=companies + ["Total"],rowLabels=boroughs+["Total"],
         cellText=celldata,loc='bottom')
 plt.tick_params(bottom=False,labelbottom=False)
 #plt.xlim(0,6)
