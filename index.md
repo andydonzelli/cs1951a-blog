@@ -2,13 +2,17 @@
 
 # Blog Post 2
 ### Some title
+---
 
 
 --- -->
 
 
 
+
 # Blog Post 1
+---
+_March 15, 2019_
 
 ### Introduction
 The purpose of this blog is to aid in visualizing and informing users about hidden links between the use of ride services and various aspects of the local environment. Because a large amount of ride service data is available for New York City (NYC), we will focus our analysis on this area.
@@ -53,12 +57,14 @@ To speed up the zip code retrieval we first tried to parallelize the python scri
 
 After about 12 hours on this proverbial "beast of a machine" (we had to restart the script a couple of times) all 32,209,351 rides in our CSV had a ZIP code associated with them. The next step was translating both our rides CSV and locations CSV into a database for analysis.
 
+The final rides table only has 25,009,005 rides. The reason for this being that we filtered out ~7 million rides with starting locations that were not within the NYC city bounds. For example, many of them started in New Jersey or Upstate New York, but were still in the original NYC datasets.
+
 
 
 
 ### Database Schema
 
-For the time being, we are using SQLite database the schema of which is shown below, we will be transitioning our data onto a MySQL database soon however so we can more easily do interactive visualizations for future blog posts. Additionally, the final rides table only has 25,009,005 rides. The reason for this being that we filtered out ~7 million rides with starting locations that were not within the NYC city bounds i.e. they started in a zip code not present in the locations table, for example, they might have started in New Jersey or Upstate New York.
+For the time being, we are storing our data in an SQLite database, the schema of which is shown below. We will be transitioning our data onto a MySQL database soon, however, to more easily produce interactive visualizations for future blog posts.
 
 ![Database Schema](/assets/web_media/db_schema.png)
 

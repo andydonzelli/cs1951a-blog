@@ -272,17 +272,23 @@ footer { line-height: 0.9; }
 
 #project_tagline { color: #aaa; font-size: 16px; font-weight: 300; background: none; text-shadow: #111 0px 0px 10px; }
 
-.fa-lyft, .fa-uber, .fa-taxi, .fa-bicycle { color: #aaa; font-weight: normal; }
+.fa-lyft, .fa-uber, .fa-taxi, .fa-bicycle { font-weight: normal; }
 
-.fa-lyft { padding-left: 4px; padding-right: 5px; }
+.fa-lyft { padding-left: 4px; padding-right: 5px; color: #ff14bb; }
 
-.fa-bicycle { padding-left: 1px; }
+.fa-bicycle { padding-left: 1px; color: #00c8fc; }
+
+.fa-taxi { color: #ffd253; }
+
+.fa-uber { color: #aaa; }
 
 .subheader { display: inline-block; position: absolute; width: 100%; margin: 10%; float: left; height: 200px; }
 
 .left-subheader { text-align: center; float: left; width: 18%; }
 
 .right-subheader { padding-left: 5%; float: left; width: 75%; }
+
+#containerTitle h1, #containerTitle p { display: inline; vertical-align: top; font-size: 16px; line-height: 28px; }
 
 h3 { padding-top: 40px; font-size: 24px; }
 
