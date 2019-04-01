@@ -28,22 +28,35 @@ with the additional conditions that the rain and wind thresholds are not met
 '''
 bin_count = 0
 with open(args.infile, 'r') as infile,open(args.outfile,'w') as outfile:
-    fieldnames = ['bin_time','unix_time','sunny','windy','rainy','cloudy','temperature']
+    fieldnames = ['bin_time','unix_time','sunny','windy','rainy','cloudy','temperature','dew_point',
+                'uv_index','precip_intensity','wind_speed','cloud_cover','apparent_temperature']
     reader = csv.DictReader(infile)
     writer = csv.DictWriter(outfile, fieldnames=fieldnames)
     writer.writeheader()
     for row in reader:
         if float(row['precipIntensity']) >= rain_threshold:
             writer.writerow({'bin_time':bin_count,'unix_time':row['time'],'sunny':0,'windy':0,
-            'rainy':1,'cloudy':0,'temperature':row['temperature']})
+            'rainy':1,'cloudy':0,'temperature':row['temperature'],'dew_point':row['dewPoint'],
+            'uv_index':row['uvIndex'],'precip_intensity':row['precipIntensity'],
+            'wind_speed':row['windSpeed'],'cloud_cover':row['cloudCover'],
+            'apparent_temperature':row['apparentTemperature']})
         elif float(row['windSpeed']) >= wind_threshold:
             writer.writerow({'bin_time':bin_count,'unix_time':row['time'],'sunny':0,'windy':1,
-            'rainy':0,'cloudy':0,'temperature':row['temperature']})
+            'rainy':0,'cloudy':0,'temperature':row['temperature'],'dew_point':row['dewPoint'],
+            'uv_index':row['uvIndex'],'precip_intensity':row['precipIntensity'],
+            'wind_speed':row['windSpeed'],'cloud_cover':row['cloudCover'],
+            'apparent_temperature':row['apparentTemperature']})
         elif float(row['cloudCover']) >= cloud_threshold:
             writer.writerow({'bin_time':bin_count,'unix_time':row['time'],'sunny':0,'windy':0,
-            'rainy':0,'cloudy':1,'temperature':row['temperature']})
+            'rainy':0,'cloudy':1,'temperature':row['temperature'],'dew_point':row['dewPoint'],
+            'uv_index':row['uvIndex'],'precip_intensity':row['precipIntensity'],
+            'wind_speed':row['windSpeed'],'cloud_cover':row['cloudCover'],
+            'apparent_temperature':row['apparentTemperature']})
         else:
             writer.writerow({'bin_time':bin_count,'unix_time':row['time'],'sunny':1,'windy':0,
-            'rainy':0,'cloudy':0,'temperature':row['temperature']})
+            'rainy':0,'cloudy':0,'temperature':row['temperature'],'dew_point':row['dewPoint'],
+            'uv_index':row['uvIndex'],'precip_intensity':row['precipIntensity'],
+            'wind_speed':row['windSpeed'],'cloud_cover':row['cloudCover'],
+            'apparent_temperature':row['apparentTemperature']})
         bin_count += 1
 print("FINISHED!!!")

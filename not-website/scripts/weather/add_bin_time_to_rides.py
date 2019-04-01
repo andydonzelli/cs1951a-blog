@@ -8,7 +8,7 @@ from argparse import ArgumentParser
 
 '''SYNOPSIS
 python3 add_bin_time_to_rides -i [csv file] -d [db file] -t [table name]
-table name should correspond to name of an existing weather table 
+table name should correspond to name of an existing weather table
 '''
 
 parser = ArgumentParser()
@@ -52,10 +52,10 @@ with open(args.infile, 'r') as infile:
         #print("bin",bin)
         c.execute('UPDATE rides set bin_time={value} where id={row_id}'.format(value=bin,row_id=id))
 '''
-c.execute("DROP TABLE IF EXISTS rides_binned")
-c.execute("CREATE TABLE rides_binned \
+c.execute("DROP TABLE IF EXISTS binned_rides")
+c.execute("CREATE TABLE binned_rides \
         (id integer PRIMARY KEY, date_time float, \
-        lat float, lng float, zip_code string,bin_time integer)")
+        company string, lat float, lng float, zip_code string,bin_time integer)")
 
 #CREATE NEW TABLE INSTEAD OF UPDATING OLD RIDES TABLE
 with open(args.infile, 'r') as infile:
@@ -66,9 +66,9 @@ with open(args.infile, 'r') as infile:
         if time < earliest_weather_time or time > latest_weather_time:
             continue
         bin = int((time - earliest_weather_time)/3600)
-        c.execute('INSERT INTO rides_binned (id,date_time,lat,lng,zip_code,bin_time) \
-        VALUES (?,?,?,?,?,?);',
-        (row['id'],row['date_time'],row['lat'],row['lng'],row['zip_code'],bin))
+        c.execute('INSERT INTO binned_rides (id,date_time,company,lat,lng,zip_code,bin_time) \
+        VALUES (?,?,?,?,?,?,?);',
+        (row['id'],row['date_time'],row['company'],row['lat'],row['lng'],row['zip_code'],bin))
 
 print("FINISHED")
 conn.commit()
