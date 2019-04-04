@@ -1,117 +1,254 @@
----
----
-
+--- 
+--- 
 @import "{{ site.theme }}";
+@import url('https://fonts.googleapis.com/css?family=Kanit|Merriweather|Source+Code+Pro:400,600');
 
 // BELOW ARE CUSTOM CSS DESCRIPTIONS, (overriding theme defaults)
 
-.inner { 
-    position: relative; 
-    max-width: 640px; 
-    padding: 5px 10px; 
-    margin: 0 auto;
+body {
+    font-family: 'Kanit', sans-serif;
 }
 
+.wrapper {
+    width: 1310px;
+    margin: 0;
+}
+
+section {
+    width: 900px;
+    float: right;
+    padding-bottom: 50px;
+}
+
+header,
 footer {
-    line-height: 0.9;
+    width: 350px;
 }
 
-// Small-screen styles are also overridden by this.
-#project_title { 
-    font-size: 44px;
+.highlighter-rouge {
     font-weight: bold;
-    line-height: 1;
-    text-align: center;
-    padding-bottom: 20px;
 }
 
-// Small-screen styles are also overridden by this.
-#project_tagline { 
-    color: #aaa; 
-    font-size: 16px; 
-    font-weight: 300; 
-    background: none; 
-    text-shadow: #111 0px 0px 10px; 
+h1 {
+    font-size: 41px;
 }
 
-.fa-lyft, .fa-uber, .fa-taxi, .fa-bicycle { 
+h2 {
+    font-size: 28px;
+}
+
+#sidebar-description {
+    text-align: justify;
+}
+
+p {
+    text-align: justify;
+    font-size: 21px;
+    font-family: 'Charter ITC', 'Metropolis';
+    color: rgba(0,0,0,.84);
+}
+
+#post-links {
+    font-family: 'Kanit';
+    font-weight: 600;
+    font-size: 21px;
+    margin-bottom: 70px; 
+}
+
+#page-title {
+    font-size: 55px;
+}
+
+#maintain {
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+}
+
+#ride-logos {
+    padding-top: 70px;
+}
+
+em {
+    font-size: 21px;
+    color: rgba(0,0,0,.68);
+}
+
+hr {
+    color: rgba(0,0,0,.68);
+}
+
+li {
+    font-size: 21px;
+}
+
+.fa-lyft,
+.fa-uber {
     font-weight: normal;
 }
 
 // This block and the next align the logos
-.fa-lyft {
-    padding-left: 4px;
-    padding-right: 5px;
-    color: rgb(255, 20, 187);
-}
-.fa-bicycle {
-    padding-left: 1px;
-    color: rgb(0,200,252);
-}
 .fa-taxi {
-    color: rgb(255,210,83);
+    color: rgb(255, 210, 83);
 }
+
+.fa-lyft {
+    color: rgb(255, 20, 187);
+    margin-left: 20px;
+}
+
 .fa-uber {
-    color: #aaa;
+    color: rgb(0, 0, 0);
+    margin-left: 20px;
 }
 
-
-.subheader {
-    display: inline-block;
-    position: absolute;
-    width: 100%;
-    margin: 10%;
-    float: left;
-    height: 200px;
-}
-.left-subheader {
-    text-align: center;
-    float: left;
-    width: 18%;
-}
-.right-subheader {
-    padding-left: 5%;
-    float: left;
-    width: 75%;
+.fa-bicycle {
+    color: rgb(0, 200, 252);
+    margin-left: 20px;
 }
 
-#containerTitle h1,
-#containerTitle p {
-    display: inline;
-    vertical-align: top;
-    font-size: 16px;
-    line-height: 28px;
+header ul {
+    all: initial;
+    * {
+        all: unset;
+    }
 }
 
-h3 {
-    padding-top: 40px;
-    font-size: 24px;
+header li {
+    all: initial;
+    * {
+        all: unset;
+    }
 }
 
-img { 
-    width: 100%;
-    box-shadow: none;
+@media print,
+screen and (max-width: 1300px) {
+
+    div.wrapper {
+        width: auto;
+        margin: 0;
+    }
+
+    header,
+    section,
+    footer {
+        float: none;
+        position: static;
+        width: auto;
+    }
+
+    header {
+        padding-right: 320px;
+    }
+
+    section {
+        border: 1px solid #e5e5e5;
+        border-width: 1px 0;
+        padding: 20px 0;
+        margin: 0 0 20px;
+    }
+
+    header a small {
+        display: inline;
+    }
+
+    header ul {
+        position: absolute;
+        right: 50px;
+        top: 52px;
+    }
 }
 
-img[alt=aws] {
-    width: 90%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+@media print,
+screen and (max-width: 720px) {
+    body {
+        word-wrap: break-word;
+    }
+
+    #ride-logos {
+        padding-top: 10px;
+    }
+
+    header {
+        padding: 0;
+    }
+
+    header ul,
+    header p.view {
+        position: static;
+    }
+
+    pre,
+    code {
+        word-wrap: normal;
+    }
 }
 
-img[alt=db] {
-    width: 70%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+@media print,
+screen and (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    #ride-logos {
+        padding-top: 10px;
+    }
+
+    .downloads {
+        width: 99%;
+    }
+
+    .downloads li,
+    .downloads li+li+li {
+        width: 33%;
+    }
 }
 
-img[alt=visuals] {
-    width: 90%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+@media print {
+    body {
+        padding: 0.4in;
+        font-size: 12pt;
+        color: #444;
+    }
 }
 
+@font-face {
+    font-family: "Metropolis";
+    src: url("../fonts/metropolis_bold.otf");
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Metropolis";
+    src: url("../fonts/metropolis_bold_italic.otf");
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: "Metropolis";
+    src: url("../fonts/metropolis_medium.otf");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Metropolis";
+    src: url("../fonts/metropolis_medium_italic.otf");
+    font-weight: normal;
+    font-style: italic;
+  }
 
+  @font-face {
+    font-family: "Charter ITC";
+    src: url("../fonts/charter_itc_medium.ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Charter ITC";
+    src: url("../fonts/charter_itc_medium_italic.ttf");
+    font-weight: normal;
+    font-style: italic;
+  }

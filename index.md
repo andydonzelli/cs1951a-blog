@@ -7,14 +7,17 @@
 
 --- -->
 
+# Midterm Report
+_April 4, 2019_
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla sem ac purus molestie, ut imperdiet augue convallis. Aliquam id metus ac sapien scelerisque placerat. Sed eget tortor feugiat, tempor erat eget, porttitor dui. Morbi eu fermentum lorem. Mauris quis semper nunc. Mauris ultricies ex elit, in semper neque consequat ac. Sed mollis lacus ligula, ac mollis turpis blandit nec. Pellentesque maximus arcu at fringilla pellentesque. Donec eleifend et erat vel laoreet. Donec quis mattis sapien. Praesent eleifend mauris in nisi semper tincidunt. Sed eu turpis a enim tristique placerat vitae et est. Maecenas porta dignissim lectus, ac tincidunt nibh tristique quis. Vivamus bibendum, libero eu porttitor bibendum, elit nunc dignissim magna, id tincidunt magna risus nec nibh. Curabitur lectus erat, iaculis eget pretium ut, mattis et elit. Maecenas non consectetur lacus, non vestibulum lectus.
 
+---
 
 # Blog Post 1
----
 _March 15, 2019_
 
-### Introduction
+## Introduction
 The purpose of this blog is to aid in visualizing and informing users about hidden links between the use of ride services and various aspects of the local environment. Because a large amount of ride service data is available for New York City (NYC), we will focus our analysis on this area.
 
 We're not looking to identify a single data relationship, but rather a set of interesting links between data available in this domain. As such, we hope to end the project with a blog containing multiple visualizations, including explanations of our analyses.
@@ -26,13 +29,13 @@ We will be working with a few datasets in our analysis. Namely,
 
 
 
-### Initial Question
+## Initial Question
 
 For our initial link of investigation, we will be exploring the relationships between the volume of ride services in different boroughs within NYC. This general question will allow us to construct the infrastructure for our data analysis so that we may build upon it with additional investigations.
 
 
 
-### Data Collection and Cleaning
+## Data Collection and Cleaning
 Unfortunately, there is little public trip data available for the two main ride services we wanted to look at, Lyft and Uber, unlike the huge amounts of Taxi ride data available. To ensure we can make fair comparisons between all the ride services we have pruned the ride data from all of our ride services to the two-month time range of the trip data available for Lyft. This two-month overlap of data between all the ride services data is August and September 2014.
 
 Similarly, the specificity and organization of the raw trip data for each of the ride service dataset also varied drastically between the datasets for each ride service. To overcome this, we merged all the ride data for the two months from all the datasets into a single rides CSV containing the data that was either present or was inferrable from all of our datasets. This `all_processed_rides.csv` included the following information of each trip: its Unix timestamp, the ride service's name, and the latitude and longitude of the start position of the ride. 
@@ -40,11 +43,7 @@ Similarly, the specificity and organization of the raw trip data for each of the
 For processing and cleaning all this data to ensure each ride was in the same format, each group member was allocated one of the four ride services and wrote a processing python script specific to that particular datasets structure.  In the end, we processed roughly 32 million rides, where each one consists of a pick-up time and coordinate, as well as the company that provided the service.
 
 
-
-
-
-
-### Location
+## Location
 For our first question, we needed to associate each of these rides to an area within New York. To accomplish this, we first scraped a table from [health.gov.ny](https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm) to retrieve a list of boroughs, and then associated zip codes and neighborhoods to these by using Python's [**Beautiful Soup** package](https://www.crummy.com/software/BeautifulSoup/bs4/doc/). 
 
 After that, we looked into using an online reverse geocoding API such as [Google Maps Geocoding-Reverse](https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse) to retrieve a zip code from each of the rides location coordinates. All of these online APIs had rate limits in the 1000's per day for free and even in their most expensive tiers still would not have supported the 32 million rides we needed to look up.
@@ -59,21 +58,13 @@ After about 12 hours on this proverbial "beast of a machine" (we had to restart 
 
 The final rides table only has 25,009,005 rides. The reason for this being that we filtered out ~7 million rides with starting locations that were not within the NYC city bounds. For example, many of them started in New Jersey or Upstate New York, but were still in the original NYC datasets.
 
-
-
-
-### Database Schema
+## Database Schema
 
 For the time being, we are storing our data in an SQLite database, the schema of which is shown below. We will be transitioning our data onto a MySQL database soon, however, to more easily produce interactive visualizations for future blog posts.
 
 ![db](assets/web_media/db_schema.png)
 
-
-
-
-
-
-### Data Analysis... So Far
+## Data Analysis... So Far
 
 <!-- |---------------|-----: |
 |Yellow Taxi    |19159254|
@@ -89,11 +80,15 @@ Even with elementary processing, we can see that the aggregated data shows some 
 
 This very simple analysis of our data is meant as a proof-of-concept of work to come. Stay tuned to discover more exciting relationships that may surprise you even more!
 
-
-
-
-### Next Steps
+## Next Steps
 
 From our analysis, the data shows that the differences across boroughs might be too wide of a scope; therefore, we will investigate across neighborhoods to see how peak volume differs. Additionally, since our data spans across 2 months, we will be narrowing this spectrum to by day and hour to see if we may find any trends.
 
 Looking forward, we aim to integrate additional possible explanatory variables such as average income in a given area of NYC to answer questions related to possible causations of income to ride services. 
+
+---
+
+# Hello World
+_March 2, 2019_
+
+Welcome to our [CS1951A - Data Science](https://cs.brown.edu/courses/csci1951-a/) blog! We are going to use this page to highlight interesting parts of our process towards understanding the hidden links between the use of ride services and various aspects of the local environment, particularly in New York City.
