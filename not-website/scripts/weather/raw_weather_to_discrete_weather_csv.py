@@ -18,9 +18,9 @@ parser.add_argument("-o", "--outfile", dest="outfile", help="Output .csv file")
 args = parser.parse_args()
 
 #Hyperparameters
-rain_threshold = 0.098
-wind_threshold = 5.0
-cloud_threshold = 0.4
+rain_threshold = 0.8 #mm/hr 
+wind_threshold = 4.0 #m/s
+cloud_threshold = 0.4 #percentage
 
 '''
 Below the cloud threshold of 0.4 we will assume weather conditions are sunny
