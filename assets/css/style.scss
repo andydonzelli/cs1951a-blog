@@ -137,7 +137,6 @@ screen and (max-width: 1300px) {
     }
 
     #ride-logos {
-        min-width: 652px;
         padding-top: 10px;
     }
 
@@ -192,6 +191,7 @@ screen and (max-width: 720px) {
 screen and (max-width: 480px) {
     body {
         padding: 15px;
+        width: 85%;
     }
 
     #ride-logos {
