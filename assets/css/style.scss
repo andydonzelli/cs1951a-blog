@@ -10,19 +10,19 @@ body {
 }
 
 .wrapper {
-    width: 1310px;
+    width: 970px;
     margin: 0;
 }
 
 section {
-    width: 900px;
+    width: 650px;
     float: right;
     padding-bottom: 50px;
 }
 
 header,
 footer {
-    width: 350px;
+    width: 280px;
 }
 
 .highlighter-rouge {
@@ -30,11 +30,11 @@ footer {
 }
 
 h1 {
-    font-size: 41px;
+    font-size: 35px;
 }
 
 h2 {
-    font-size: 28px;
+    font-size: 24px;
 }
 
 #sidebar-description {
@@ -43,7 +43,7 @@ h2 {
 
 p {
     text-align: justify;
-    font-size: 21px;
+    font-size: 18px;
     font-family: 'Charter ITC', 'Metropolis';
     color: rgba(0,0,0,.84);
 }
@@ -51,21 +51,21 @@ p {
 #post-links {
     font-family: 'Kanit';
     font-weight: 600;
-    font-size: 21px;
-    margin-bottom: 70px; 
+    font-size: 18px;
+    margin-bottom: 30px; 
 }
 
 #page-title {
-    font-size: 55px;
+    font-size: 45px;
 }
 
 #maintain {
     font-family: 'Kanit', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #ride-logos {
-    padding-top: 70px;
+    padding-top: 30px;
 }
 
 em {
@@ -93,17 +93,17 @@ li {
 
 .fa-lyft {
     color: rgb(255, 20, 187);
-    margin-left: 20px;
+    margin-left: 14px;
 }
 
 .fa-uber {
     color: rgb(0, 0, 0);
-    margin-left: 20px;
+    margin-left: 14px;
 }
 
 .fa-bicycle {
     color: rgb(0, 200, 252);
-    margin-left: 20px;
+    margin-left: 14px;
 }
 
 header ul {
@@ -121,7 +121,7 @@ header li {
 }
 
 @media print,
-screen and (max-width: 1300px) {
+screen and (max-width: 1000px) {
 
     div.wrapper {
         width: auto;
