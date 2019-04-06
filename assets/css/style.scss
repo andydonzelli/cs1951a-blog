@@ -70,7 +70,7 @@ p {
 
 em {
     font-size: 21px;
-    color: rgba(0,0,0,.68);
+    color: rgba(0,0,0,.88);
 }
 
 hr {
@@ -78,8 +78,25 @@ hr {
 }
 
 li {
-    font-size: 21px;
+    font-size: 18px;
+    font-family: 'Charter ITC', 'Metropolis';
+    color: rgba(0,0,0,.84);
 }
+
+img[alt=service_weather_table] { 
+    width: 512px;
+    height: 416px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img[alt=visuals] { 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 .fa-lyft,
 .fa-uber {
