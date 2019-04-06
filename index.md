@@ -15,7 +15,7 @@ We’re interested in understanding what ridesharing is like in New York City. D
 
 To answer these questions, we cleaned and aggregated a number of datasets to produce a single database of every ride taken with Taxis (Yellow and Green), Uber, Lyft, and Citibikes. We limited our scope to August and September 2014, since this was the only range available in the Lyft dataset. Even for just two months, our database contains 32 million rides!
 
-For each ride, we have geographic coordinates and date/time of the pick-up, as well as the company that provided the service. We used those coordinates to additionally include the zip code of the pick-up. This, in turn, links each ride with its starting neighborhood and borough, enabling us to perform richer, location-based analyses. The diagram below describes our database structure, but far more information on the process and our initial results are described in [Blog Post 1](#blog-post-1)).
+For each ride, we have geographic coordinates and date/time of the pick-up, as well as the company that provided the service. We used those coordinates to additionally include the zip code of the pick-up. This, in turn, links each ride with its starting neighborhood and borough, enabling us to perform richer, location-based analyses. The diagram below describes our database structure, but far more information on the process and our initial results are described in [Blog Post 1](#blog-post-1).
 
 ![db](assets/web_media/db_schema.png)
 
