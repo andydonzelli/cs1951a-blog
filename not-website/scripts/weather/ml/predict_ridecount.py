@@ -79,7 +79,7 @@ if __name__ == '__main__':
     X = AddWeekday(X)
     X = (X - X.mean()) / X.std()    # Normalize
     
-    y = ReadRideData('citi_brooklyn_weather_full.csv')
+    y = ReadRideData('citi_brooklyn_weather_fixed.csv')
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15, shuffle=False)
 
