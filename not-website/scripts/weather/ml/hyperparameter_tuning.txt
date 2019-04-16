@@ -1,0 +1,35 @@
+Hyperparameter Tuning
+
+
+500 epoch, nonvector norm
+20,5,1 - layers
+
+3479		tanh,elu,elu
+3476		tanh,elu,None
+3422		tanh,elu,linear
+3436		tanh,elu,linear (repeat)
+3698		elu,elu,linear
+5136		tanh,tanh,linear
+4507		tanh,tanh,elu
+3475		tanh,elu,elu
+
+
+keeping activations constant at tanh,elu,linear
+
+3468		20,20,1		(dipped below often)
+3576		20,20,1 	(repeat, dipped below often)
+3455		5,5,1
+3360		5,5,1		(repeat)
+3405		5,5,1		(repeat)
+3405		5,5,5,1
+3424		5,5,5,1		(repeat)
+
+4117		5,5,1–sigmoid,elu,linear
+
+
+keeping constant with tanh,elu,linear–5,5,1
+
+3379		with-weekday
+3378		with-weekday 	(repeat)
+
+3028		2000epoch, with-weekday
