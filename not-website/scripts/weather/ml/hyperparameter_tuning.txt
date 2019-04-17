@@ -33,3 +33,11 @@ keeping constant with tanh,elu,linear–5,5,1
 3378		with-weekday 	(repeat)
 
 3028		2000epoch, with-weekday
+
+2417		5000epoch, with-weekday
+2577		5000epoch, with-weekday, with-weekend
+
+
+
+
+

@@ -15,7 +15,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 def ReadWeatherData(filename):
     X = np.genfromtxt(filename, delimiter=',')
-    X = X[1:,1:]    # Remove header row and remove time column.
+    X = X[1:,-1]    # Remove header row and store last column (UV Index) only.
     return X
 
 
@@ -43,9 +43,8 @@ def AddWeekday(X):
     X_new = np.zeros(new_dims, dtype=float)
     X_new[:,:-1] = X        # Copy X into X_new (except for new column)
 
-    
     for i in range(X.shape[0]):
-        X_new[i,-1] = ((i//24) + 4) % 7     # Monday is 0, so fri,sat,sunday are highest.
+         X_new[i,-1] = ((i//24) + 4) % 7     # Monday is 0, so fri,sat,sunday are highest.
     
     return X_new
 
@@ -57,7 +56,7 @@ def AddWeekend(X):
     X_new[:,:-1] = X        # Copy X into X_new (except for new column)
 
     for i in range(X.shape[0]):
-        X_new[i,-1] = int(((i+4) % 7) <= 1) #TODO: This is incorrect
+        X_new[i,-1] = int(((i+4) % 7) <= 1)
     
     return X_new
 
@@ -80,8 +79,8 @@ def PlotTestResults(y, pred):
     ax.plot(x, y, label='True')
     ax.plot(x, pred, label='Predicted')
     plt.xlabel('Hours (since start of test)')
-    plt.ylabel('Rides per hour')
-    plt.title('Prediction of Citibike use from Weather')
+    plt.ylabel('UV Index')
+    plt.title('Prediction of UV Index from Citibike Use')
     plt.legend()
     plt.show()
 
@@ -90,20 +89,21 @@ def PlotTestResults(y, pred):
 
 
 if __name__ == '__main__':
-    X = ReadWeatherData('hourly_weather_aug-sep_2014.csv')
+    y = ReadWeatherData('hourly_weather_aug-sep_2014.csv')
+    X = ReadRideData('citi_brooklyn_weather_fixed.csv')
+    X = X.reshape(len(X),1)
     X = AddHourOfDay(X)
     X = AddWeekday(X)
-    # X = AddWeekend(X)
+    # X = AddWeekend(X)     
     X = (X - X.mean()) / X.std()    # Normalize
     
-    y = ReadRideData('citi_brooklyn_weather_fixed.csv')
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15, shuffle=False)
 
     # Create the model and train it.
     model = CreateModel(X_train.shape[1])
     print('\n\nTRAINING:')
-    model.fit(X_train, y_train, epochs=5000, verbose=0, validation_data=(X_test,y_test))
+    model.fit(X_train, y_train, epochs=5000, verbose=1, validation_data=(X_test,y_test))
 
     # Test the model
     print('\n\nTESTING:')
