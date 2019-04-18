@@ -2,7 +2,7 @@
 _April 17, 2019_
 
 ## Catching you up
-(As the hip, savvy, blog-enthusiast you are, consumer of all things niche and esoteric) Thus far, you’ve been following us along our journey into the ride services economy in NYC. But for the sake of thoroughness, let’s recap our journey thus far. 
+As the hip, savvy, blog-enthusiast you are, consumer of all things niche and esoteric, you’ve been following us along our journey into the ride services economy in NYC. But for the sake of thoroughness, let’s recap our journey thus far. 
 
 As you’ll recall, we began our inquiry into the ride services economy in NYC with a broad focus on the major players namely, Uber, Lyft, Citi and taxis. However, data bottlenecks and skewed class distributions forced us to restrict our analysis to the two-month period June 2014 - August 2014 in the borough of Brooklyn, which demonstrated the most reasonably balanced distribution of rides across the different services. 
 
