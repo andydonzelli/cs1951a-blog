@@ -1,11 +1,43 @@
-<!-- Uncomment me to start Blog Post 2 (or see what it looks like).
-
 # Blog Post 2
-### Some title
+_April 17, 2019_
+
+## Catching you up
+(As the hip, savvy, blog-enthusiast you are, consumer of all things niche and esoteric) Thus far, you’ve been following us along our journey into the ride services economy in NYC. But for the sake of thoroughness, let’s recap our journey thus far. 
+
+As you’ll recall, we began our inquiry into the ride services economy in NYC with a broad focus on the major players namely, Uber, Lyft, Citi and taxis. However, data bottlenecks and skewed class distributions forced us to restrict our analysis to the two-month period June 2014 - August 2014 in the borough of Brooklyn, which demonstrated the most reasonably balanced distribution of rides across the different services. 
+
+Given the restrictive timeframe of our data, we wanted to explore the relationship between our ride volumes and another variable that exhibited enough variation along a two-month timespan to constitute a basis for further analysis. That reasoning led us to the question of how weather impacts the use of ride-sharing services. We explored this relationship through linear regression analysis where the main takeaway was a significantly higher R-squared value for Citi Bike compared to the other services which confirmed our intuitive hypothesis that weather more meaningfully affects bike services than any motor-based service.
+
+Our weather analysis served as a springboard for further analysis into Citi Bike, particularly how the volume of rides per hour varies throughout the day and how weekdays might differ from weekends. The main takeaways here were peak ride hours occurred during the commute hours to and from work and ride usage patterns varied noticeably between weekdays and weekends but were largely homogenous within the categories themselves (see midterm report for further details!). 
+
+## Prediction fun with neural networks
+Now that we’re all caught up, let’s talk about where we’re heading next. Given the strong relationship between weather and how many New Yorkers choose to use Citi Bike, we asked ourselves: how well can Brooklyn’s weather for a given hour predict how many rides were taken?
+
+We turned to neural networks to model this relationship because even a simple architecture has the ability to represent very complex relationships between features. After some experimentation, we set on a 3-layer feed-forward network, trained with the Adam optimizer on 5000 epochs.
+
+The weather data used was the same as described in the Midterm Report: precipitation intensity, temperature, apparent temperature, dew point, wind speed, cloud cover, and UV index. In addition to these features, we also included the time-of-day (i.e. hours 0-23), and the day of the week (i.e. Mon-Sun maps to 0-6). Although this weakens our claim that weather alone can predict bike-use, adding these features helps normalize against other aspects of the user’s decisions that aren’t affected by weather (is it Monday at 8 am and I need to get to work, or is it 4 am I’m sleeping and don’t need a bike no matter the weather).
+
+
+The model was trained on the first 85% of the 1464 rows of data (hours in the two months). It was tested on the (entirely unseen) final 15% of the data. These account for about 9 days at the end of the two months. The model’s prediction of these test hours is shown in the figure below:
+
+![visuals](assets/web_media/predict_ridecount_weather.png)
+
+We’re quite happy with the accuracy of this model, but we decided to take it a step further. If good weather and bike use really do go hand-in-hand, then maybe we might be able to predict the weather from the number of rides taken. We restricted our humble goal of predicting the entire weather to just predicting UV-index. Using a similar model to the one described above, and the same training procedure, we obtained the following results:
+
+![visuals](assets/web_media/predict_ridecount_uv.png)
+
+## Summary of findings
+
+From our initial results, a strong relationship seems to exist between weather conditions and the Citi Bike usage per hour. With regards to predicting rides per hour based on weather conditions, we can see that our model captures the general pattern of ride volumes per day. On weekdays, we see a peak of rides in the morning, followed by a significant dip in ride volume throughout the day until ride volumes peak again in the late afternoon. On weekends, we generally see a gradual increase in rides throughout the day until it begins to gradually decrease towards the night.  Essentially, we can see each day in our graph delineated by these general ride volume patterns. While the estimation of peak volume of rides per hour by our model differs significantly from the true volume at times, we hope with additional data and further adjustment to our models that we can improve the performance of our model. Nevertheless, the initial results are encouraging. 
+
+Similarly, the inverse relationship of predicting weather (UV index) from Citi Bike ride volumes shows promising results. Generally, our model is fairly accurate in its predictions except for a few cases where it overestimates UV index based on ride volumes. We plan to do additional testing of our model to further validate our initial results. 
+
+## Things to look out for in the final report:
+
+* More details about our neural network architecture and justification for its use.
+* The model trained on a whole _year_, instead of just two months. Is the model as accurate in the winter as it is in the summer?
+
 ---
-
-
---- -->
 
 # Midterm Report
 _April 5, 2019_
@@ -25,7 +57,7 @@ This midterm report builds on our previous work to look into two distinct variat
 
 We were curious about how weather impacts the use of ride-sharing services. We decided to restrict our search to Brooklyn because this borough had the most uniform distribution of ride services. This choice mitigates problems related to class-imbalance and makes the analysis more straight-forward.
 
-The weather data for each hour of our two-month period was obtained from the DarkSky API. We recorded the following weather properties for each hour at Brooklyn’s geographic center:
+The weather data for each hour of our two-month period was obtained from the Dark Sky API. We recorded the following weather properties for each hour at Brooklyn’s geographic center:
 
 * Precipitation intensity (how much is it raining?)
 * Temperature
@@ -44,7 +76,7 @@ Additionally, for potential classification analysis, we devised labels of sunny,
 
 ![darksky](assets/web_media/powered_by_darksky.png)
 
-_The above image has been included to comply with the [DarkSky API](https://darksky.net/dev) terms of service._
+_The above image has been included to comply with the [Dark Sky API](https://darksky.net/dev) terms of service._
 
 Our initial hypothesis was that weather would impact the Citibike ride service more compared to other motor vehicle ride services. Intuitively, our assumption was that customers would take into consideration the weather more when riding a bike compared to a motor vehicle. We tested this hypothesis by performing Multiple Linear Regression on the data, with the dependent variable being the number of rides taken with a given company in each hour and the weather data being the independent variables.
 
