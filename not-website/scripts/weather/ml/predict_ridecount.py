@@ -12,7 +12,7 @@ import tensorflow as tf
 tf.logging.set_verbosity(tf.logging.ERROR)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-DOING_YEAR = False
+DOING_YEAR = True
 
 def ReadWeatherData(filename):
     X = np.genfromtxt(filename, delimiter=',')
@@ -74,7 +74,7 @@ def PlotTestResults(y, pred):
     ax.plot(x, pred, label='Predicted')
     plt.xlabel('Hours (since start of test)')
     plt.ylabel('Rides per hour')
-    plt.title('Prediction of Citibike use from Weather')
+    plt.title('Prediction of Citi bike use from Weather')
     plt.legend()
     # plt.show()
 
@@ -135,6 +135,61 @@ def main_year(X,y):
     PlotTestResults(y_test3, pred3)
     plt.show()
 
+def main_mid_seasons(X,y):
+    X = np.roll(X, 31*24, axis=0)  # Start on Dec 1
+    y = np.roll(y, 31*24, axis=0)
+
+    idxs = [0, 0.1125, 0.1375, 0.25, 0.36250, 0.3875, 0.5, 0.6125, 0.6375, 0.75, 0.8625, 0.8875, 1]
+    idxs = [int(i*len(y)) for i in idxs]
+
+    X_train0 = np.concatenate( [ X[idxs[0]:idxs[1]], X[idxs[2]:idxs[3]] ])
+    X_test0 = X[idxs[1]:idxs[2]]
+    X_train1 = np.concatenate( [ X[idxs[3]:idxs[4]], X[idxs[5]:idxs[6]] ])
+    X_test1 = X[idxs[4]:idxs[5]]
+    X_train2 = np.concatenate( [ X[idxs[6]:idxs[7]], X[idxs[8]:idxs[9]] ])
+    X_test2 = X[idxs[7]:idxs[8]]
+    X_train3 = np.concatenate( [ X[idxs[9]:idxs[10]], X[idxs[11]:idxs[12]] ])
+    X_test3 = X[idxs[10]:idxs[11]]
+
+    y_train0 = np.concatenate( [ y[idxs[0]:idxs[1]], y[idxs[2]:idxs[3]] ])
+    y_test0 = y[idxs[1]:idxs[2]]
+    y_train1 = np.concatenate( [ y[idxs[3]:idxs[4]], y[idxs[5]:idxs[6]] ])
+    y_test1 = y[idxs[4]:idxs[5]]
+    y_train2 = np.concatenate( [ y[idxs[6]:idxs[7]], y[idxs[8]:idxs[9]] ])
+    y_test2 = y[idxs[7]:idxs[8]]
+    y_train3 = np.concatenate( [ y[idxs[9]:idxs[10]], y[idxs[11]:idxs[12]] ])
+    y_test3 = y[idxs[10]:idxs[11]]
+
+
+    # Create the model and train it.
+    # model0 = CreateModel(X_train0.shape[1])
+    # model0.fit(X_train0, y_train0, epochs=1000, verbose=1, validation_data=(X_test0,y_test0))
+    model1 = CreateModel(X_train0.shape[1])
+    model1.fit(X_train1, y_train1, epochs=1000, verbose=1, validation_data=(X_test1,y_test1))
+    # model2 = CreateModel(X_train0.shape[1])
+    # model2.fit(X_train2, y_train2, epochs=1000, verbose=1, validation_data=(X_test2,y_test2))
+    model3 = CreateModel(X_train0.shape[1])
+    model3.fit(X_train3, y_train3, epochs=1000, verbose=1, validation_data=(X_test3,y_test3))
+
+    # Test the model
+    print('\n\nTESTING:')
+    # pred0 = model0.predict(X_test0, verbose=0)
+    # print('MSE 0: ', model0.evaluate(X_test0, y_test0, verbose=0))
+    pred1 = model1.predict(X_test1, verbose=0)
+    print('MSE 1: ', model1.evaluate(X_test1, y_test1, verbose=0))
+    # pred2 = model2.predict(X_test2, verbose=0)
+    # print('MSE 2: ', model2.evaluate(X_test2, y_test2, verbose=0))
+    pred3 = model3.predict(X_test3, verbose=0)
+    print('MSE 3: ', model3.evaluate(X_test3, y_test3, verbose=0))
+
+    # Plot the real test data next to the predictions.
+    # PlotTestResults(y_test0, pred0)
+    PlotTestResults(y_test1, pred1)
+    # PlotTestResults(y_test2, pred2)
+    PlotTestResults(y_test3, pred3)
+    plt.show()
+
+
 
 
 def main_seasons(X,y):
@@ -190,6 +245,7 @@ if __name__ == '__main__':
 
     if DOING_YEAR:
         # main_year(X,y)
-        main_seasons(X,y)
+        # main_seasons(X,y)
+        main_mid_seasons(X,y)
     else:
         main_2mo(X,y)
