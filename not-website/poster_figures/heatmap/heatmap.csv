@@ -1,0 +1,36 @@
+Ride Service,Feature,Probability
+Yellow Taxi,Temperature,0.107
+Yellow Taxi,Dew Point,0.3246
+Yellow Taxi,UV Index,1
+Yellow Taxi,Precipitation Intensity,0.2067
+Yellow Taxi,Wind Speed,0.9974
+Yellow Taxi,Cloud Cover,0.0289
+Yellow Taxi,Apparent Temperature,0.1514
+Green Taxi,Temperature,0.996
+Green Taxi,Dew Point,1
+Green Taxi,UV Index,1
+Green Taxi,Precipitation Intensity,0.1265
+Green Taxi,Wind Speed,0.6645
+Green Taxi,Cloud Cover,0.9919
+Green Taxi,Apparent Temperature,0.5174
+Uber,Temperature,0.3533
+Uber,Dew Point,1
+Uber,UV Index,1
+Uber,Precipitation Intensity,0.4802
+Uber,Wind Speed,0.68
+Uber,Cloud Cover,1
+Uber,Apparent Temperature,0.9829
+Lyft,Temperature,0.9999
+Lyft,Dew Point,0.9681
+Lyft,UV Index,1
+Lyft,Precipitation Intensity,0.1321
+Lyft,Wind Speed,0.8658
+Lyft,Cloud Cover,0.1273
+Lyft,Apparent Temperature,0.9822
+Citi Bike,Temperature,0.9801
+Citi Bike,Dew Point,1
+Citi Bike,UV Index,0.4076
+Citi Bike,Precipitation Intensity,0.9937
+Citi Bike,Wind Speed,1
+Citi Bike,Cloud Cover,0.9255
+Citi Bike,Apparent Temperature,0.1071
