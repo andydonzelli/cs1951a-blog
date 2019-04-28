@@ -4,7 +4,12 @@ from sklearn.model_selection import train_test_split
 import keras
 
 import numpy as np
+
+import seaborn as sns
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as font_manager
+from matplotlib import rc
 
 # Supress annoying Warning and Info messages.
 import os
@@ -12,7 +17,7 @@ import tensorflow as tf
 tf.logging.set_verbosity(tf.logging.ERROR)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-DOING_YEAR = True
+DOING_YEAR = False
 
 def ReadWeatherData(filename):
     X = np.genfromtxt(filename, delimiter=',')
@@ -66,17 +71,47 @@ def CreateModel(num_features):
 
 
 def PlotTestResults(y, pred):
-    plt.style.use('seaborn-whitegrid')
-    fig = plt.figure()
-    ax = plt.axes()
+    # Font Stuff
+    font_files = font_manager.findSystemFonts(
+        fontpaths=os.getcwd() + '../../../poster_figures/fonts')
+    font_list = font_manager.createFontList(font_files)
+    font_manager.fontManager.ttflist.extend(font_list)
+    mpl.rcParams['font.family'] = 'Product Sans'
+    # Figure aspect ratio
+    fig, ax = plt.subplots(figsize=(14, 9))
     x = list(range(len(y)))
-    ax.plot(x, y, label='True')
-    ax.plot(x, pred, label='Predicted')
+    # Line Labels
+    ax.plot(x, y, label='True', color="#00c8fc", linewidth=2)
+    ax.plot(x, pred, '--', label='Predicted', color="#DB4437", linewidth=2)
+    # Axis value Ranges
     plt.xlabel('Hours (since start of test)')
     plt.ylabel('Rides per hour')
-    plt.title('Prediction of Citi bike use from Weather')
-    plt.legend()
-    # plt.show()
+    # Add title with bold font and padding
+    title = "Prediction of Citi Bike use from Weather"
+    plt.title(title, fontweight="bold", pad=40, size=45)
+    fig.canvas.set_window_title(title)
+    # Position legend and make it horizontal
+    leg = plt.legend(fontsize=30, ncol=2,
+                     bbox_to_anchor=(0.5, 1.01), loc='center')
+    leg.get_frame().set_linewidth(0.0)
+    # Remove actual tick marks
+    plt.tick_params(top=False, bottom=False, left=False,
+                    right=False, labelleft=True, labelbottom=True)
+    for axis in [ax.xaxis, ax.yaxis]:
+        axis.label.set_weight("bold")
+        axis.label.set_size(38)
+        axis.labelpad = 15
+    # Change axis label font size
+    plt.tick_params(axis='both', which='major', labelsize=30)
+    # Remove lines
+    plt.gca().spines["top"].set_alpha(0)
+    plt.gca().spines["bottom"].set_alpha(0)
+    plt.gca().spines["right"].set_alpha(0)
+    plt.gca().spines["left"].set_alpha(0)
+    # Set layout
+    fig.tight_layout()
+    fig.savefig("predict_ridecount.svg", dpi=1200)
+    plt.show()
 
 
 
