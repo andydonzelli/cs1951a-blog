@@ -1,3 +1,158 @@
+# Final Blog Post!
+_May 4, 2019_
+
+## Vision
+Initially, our project was centered around the idea of examining interesting relationships among the ride services. To know how far we’ve come, we must first recall where our journey began. Let’s circle back to a couple of relationships we suggested as inquiries in our proposal, which are as follows:
+
+* _Correlation between the use of one or more rideshare services and other variables such as:_
+    * _Weather_
+    * _Time_  
+    * _Availability of other rideshare services_
+    * _Demand and Supply of rides_
+    * _Location_
+
+* _How have ride services changed over time and where are they heading?_
+
+Reviewing this list, some ideas were borne out of naive optimism for the plethora of data we believed we would have at our disposal. The idea of modeling demand and supply of rides, for example, was quickly put to rest once we realized that we had access to only two months of overlapping data for Lyft and Uber not to mention that the scope of the data didn’t contain the level of detail necessary to model such complex market relationships.
+
+With that said, we feel that we made measurable progress in examining the majority of relationships we set out to explore, engaging with the data both visually and analytically. Recapping our circuitous journey (which we’ll get into more detail below), we delved into location to see how ride services differed over boroughs in NYC. Take a look at the below scatter plot of ride locations overlayed on a map of the NYC boroughs over 12 hours. What’s cool about this is that the scatter plot of rides implicitly defines the explicit outlines of the streets of NYC!
+
+![visuals](assets/web_media/final_blog_post/final_ny_map.png)
+
+That inquiry revealed the service imbalances within the boroughs as well as the ride volume disparities across the boroughs. This informed our decision to focus on Brooklyn where we examined the temporal relationships of ride volume per hour as well as different days of the week. Eventually, the analysis also evolved into predicting seasonal ride volumes (i.e. another temporal relationship.
+
+From our temporal analysis, we next turned to investigate how the weather might affect the volume of different ride services. Regression analysis led us to focus this inquiry on Citi Bike, building machine learning models to predict ride volume given weather conditions and inversely, predict weather conditions given ride volume.
+
+Thus, we grappled with three of the main relationships we had set forth at the beginning of our journey, finding interesting patterns along the way. Keep reading for a full wrap up on our data, methodology, and results!
+
+## Data
+
+Over the course of this project, we have worked with a lot of data so lets recap some key information about this data in an easy to follow question and answer format:
+
+### What data did we use?
+
+#### Raw Ride Data
+
+* For both Yellow and Green Taxis, we used the [Trip Record Data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) provided by the New York City Taxi and Limousine Commission for August and September 2014:
+    * [yellow_tripdata_2014-08.csv](https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2014-08.csv)
+    * [yellow_tripdata_2014-09.csv](https://s3.amazonaws.com/nyc-tlc/trip+data/yellow_tripdata_2014-09.csv)
+    * [green_tripdata_2014-08.csv](https://s3.amazonaws.com/nyc-tlc/trip+data/green_tripdata_2014-08.csv)
+    * [green_tripdata_2014-09.csv](https://s3.amazonaws.com/nyc-tlc/trip+data/green_tripdata_2014-09.csv)
+
+* For Uber and Lyft, we used the [Uber Pickups in New York City dataset](https://www.kaggle.com/fivethirtyeight/uber-pickups-in-new-york-city) hosted on Kaggle again for August and September 2014:
+    * [uber-raw-data-aug14.csv](https://www.kaggle.com/fivethirtyeight/uber-pickups-in-new-york-city#uber-raw-data-aug14.csv)
+    * [uber-raw-data-sep14.csv](https://www.kaggle.com/fivethirtyeight/uber-pickups-in-new-york-city#uber-raw-data-sep14.csv)
+    * [Lyft_B02510.csv](https://www.kaggle.com/fivethirtyeight/uber-pickups-in-new-york-city#other-Lyft_B02510.csv)
+
+* For Citi Bike, we used the [monthly trip history data](https://www.citibikenyc.com/system-data) the company themselves provides for the whole 2014 year:
+    * [201401-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201401-citibike-tripdata.zip)
+    * [201402-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201402-citibike-tripdata.zip)
+    * [201403-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201403-citibike-tripdata.zip)
+    * [201404-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201404-citibike-tripdata.zip)
+    * [201405-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201405-citibike-tripdata.zip)
+    * [201406-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201406-citibike-tripdata.zip)
+    * [201407-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201407-citibike-tripdata.zip)
+    * [201408-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201408-citibike-tripdata.zip)
+    * [201409-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201409-citibike-tripdata.zip)
+    * [201410-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201410-citibike-tripdata.zip)
+    * [201411-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201411-citibike-tripdata.zip)
+    * [201412-citibike-tripdata.zip](https://s3.amazonaws.com/tripdata/201412-citibike-tripdata.zip)
+
+#### Raw Weather Information
+* To obtain hourly New York City weather information for the whole 2014 year we used [Dark Sky's API](https://darksky.net/dev) (image included below to comply with terms of service) and corresponding Python package [darkskylib](https://pypi.org/project/darkskylib/).
+
+![visuals](assets/web_media/final_blog_post/powered_by_darksky.png)
+
+#### NYC Borough Information
+* In order to represent borough information, we created a locations table in our database so we could associate a zip code with the borough that we scraped from [NYC's Department of Health website](https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm).
+
+#### Zip Code information
+* For mapping latitude and longitude from our raw data to zip codes, we utilized the Python package [uszipcode](https://pypi.org/project/uszipcode/).
+
+#### Cleaned Data
+* During different stages of our project, we used different subsets of the cleaned ride data associated with each rides borough location, binned hour, and weather information for our analysis. Below are links to the major cleaned data SQLite databases and CSV's we used for analysis:
+    * [core_all_2014_citibike_brooklyn.db](https://drive.google.com/open?id=148NyCzgPcJ862tDcmPgvVQp8umhKyifp)
+    * [core_2_months_brooklyn_all_services.db](https://drive.google.com/open?id=1BAJ7bQG9Ae1oyVSVAnvd3oeA5CQb6fuE)
+    * [core_2_months_all_services_all_boroughs.db](https://drive.google.com/open?id=1ajpnPulTf6Bz1JkI_6WiCgDJbDA_rNhI)
+    * [2014_brooklyn_only_rides.csv](https://drive.google.com/open?id=1T14EEihFi9IlKnu6zafM_KreracwOB_n)
+    * [all_processed_rides.csv](https://drive.google.com/open?id=1o5_mM8tbhaTrJHcASxzX3yuHxC5aD2oM)
+    * [brooklyn_weather.csv](https://drive.google.com/open?id=1HqLhknWmm0dJs_G6cR0xzHhLqBsp8kJm)
+
+### Relative to its size was there enough information contained within it?
+We wanted to find interesting relationships among the ride services in NYC and were able to achieve this goal even with the limitations of the ride data available for Lyft and Uber not being recent data , spanning across an overlap of two months rather than having access to years worth of data across all ride services.
+
+### Were you able to find what you wanted in the data?
+Unfortunately, only the taxi data provided drop off locations, how much time each ride took, and cost for each ride. It would have been an interesting endeavour to find out how far the average rides were and what impacted the cost for each ride service. Overall, the data we collected was sufficient for us to achieve the goals we set out to achieve for the project.
+
+### How did we collect, clean, and integrate it?
+After researching and subsequently deciding on our datasets we looked at what information was present among all of them and decided on a standardized format. Each team member took one of the four datasets and cleaned it into a general format (i.e. the UNIX timestamp for the ride, the ride service, and the latitude and longitude coordinates) by using Python scripts each member developed. Once each dataset was cleaned, we combined all the different rides services’ data into one big CSV using a bash script.
+
+Since this ride data only provided latitude and longitude information and we wanted to see which borough each ride was associated with, we had to [reverse geocode](https://en.wikipedia.org/wiki/Reverse_geocoding) it in some way. Due to the magnitude of data (~32 million rides), we decided to use an offline approach using the Python library [uszipcode](https://pypi.org/project/uszipcode/). In order to efficiently process all the rides (i.e. taking ~5 hours rather than ~5 days), we used a powerful AWS EC2 instance to perform the zip code association in parallel. At the end of this process, we had the one big CSV again with an extra column for each rides zip code.
+
+In order to filter out all the rides that did not start within any of the five NYC boroughs, we put this new ride data into a SQLite database alongside another table that associated each NYC Zip Code to an NYC borough (we obtained this information from scraping [NYC's Department of Health website](https://www.health.ny.gov/statistics/cancer/registry/appendix/neighborhoods.htm)). We then performed a natural join across the tables on the zip code column to exclude any rides say that started in New Jersey or in New York but not in NYC, etc. and outputted the result to a CSV from within SQLite. This method of outputting SQL joins to CSV's was how we essentially produced all the different subsets of data we needed for each stage of analysis in the project.
+
+For integrating weather into our data (needed for the regression and machine learning analysis), we had to modify the rides data to be binned into hour groups and add another table detailing the weather statistics focusing on Brooklyn (since it had the most even distribution of the ride services) for each hour in the range of the rides data by using the Dark Sky Api and Python scripts.
+
+In order to create our final visualizations, we used [Seaborn](https://seaborn.pydata.org/) and [Matplotlib](https://matplotlib.org/) but heavily customized the appearance of the graphs to ensure consistency and a more modern design by removing excess line markers, customizing the font-appearance, etc.
+
+**Note**: All of our data manipulation scripts we used throughout the project are categorized into descriptive folder names and can be viewed [here](https://github.com/andydonzelli/cs1951a-blog/tree/master/not-website/scripts).
+
+## Methodology
+
+### Ride Count Analysis
+
+Focusing on the data in Brooklyn since the ride counts were more uniform compared to the other boroughs in NYC, we predicted that the peaks of start ride time would occur during prime commuting hours during the working week and in the middle of the day till late at night for the weekends.
+
+In order to analyze the ride count on a time (i.e hourly) basis, we needed to bin the ride counts into hourly slots based on the given Unix time in the data. Once each ride was binned to a given hour, we separated the data by company, grouped the data points by day, averaged the ride count for a given day of the week.
+
+#### _Results_
+Our analysis of the ride counts showed that the peak ride times for ride services during a given weekday were from 7-9 am and 5-10 pm. During a given weekend day, the peak times occurred during the time frame between 7 am - 11 pm. These results validate our proposed predictions of peak times during commuting hours for a weekday and mid-morning till late at night for a weekend day.
+
+![visuals](assets/web_media/final_blog_post/non_stacked_area_plots_mon.svg)
+![visuals](assets/web_media/final_blog_post/non_stacked_area_plots_sat.svg)
+
+### Regression and Weather
+Following our exploratory trend, we started to look at types of features that could be affecting the ride services. Naturally, we looked to weather to see if there were any interesting correlations. Intuitively, we hypothesized that the weather would affect Citi Bike more than the other ride services since customers would take into consideration the weather more when riding a bike compared to a motor vehicle.
+
+To test our hypothesis, we gathered weather data for each hour of our two-month period using the Dark Sky API that retrieves weather features given a location for a specific time period. From this, we performed Multiple Linear Regression on our combined ride count and weather data, with the dependent variable being the number of rides for a given company in each hour and the weather features being the independent variable. Namely, the weather features we choose were:
+
+* Apparent Temperature
+* Cloud Cover
+* Dew Point
+* Precipitation Intensity
+* Temperature
+* UV Index
+* Wind Speed
+
+#### _Results_
+Taking into consideration the $$R^2$$ values, our analysis shows that the Citi Bike $$R^2$$ value of 0.2512 is almost double than the other values for each other ride service, confirming our initial hypothesis that weather features affect Citi Bike more than the other ride services.
+
+![visuals](assets/web_media/final_blog_post/r2_heatmap.png)
+
+Focusing on the $$p$$-values from the regression, there are a few interesting results from the data. Looking at Citi Bike, weather features _Apparent Temperature_ and _UV Index_ were the most significant features among this ride service while _Precipitation Intensity_ was one of the least significant possibly due to the fact that the data collected was from the Summer months of August and September where it is mostly sunny and there is not much rain. Inversely, _Precipitation Intensity_ was one the most significant features for the motor vehicles that could be due to that when it did rain during the summer, you certainly don’t want to ride a bike.
+
+![visuals](assets/web_media/final_blog_post/p-value_heatmap.svg)
+
+### Machine Learning Analysis
+Now, confident that there is a meaningful relationship between weather and how many New Yorkers choose to take Citi Bikes, we set out to produce an accurate model that could estimate bike usage from the weather. We turned to neural networks because even a simple architecture has the ability to represent very complex relationships between features.
+
+The chosen architecture has two hidden layers of 5 units each, using tanh and elu activation functions respectively. We trained a few variations of this architecture on the same data, and kept the version with the lowest MSE.
+
+The weather data was downloaded with the DarkSky API, giving us an hourly measure of: precipitation intensity, temperature, apparent temperature, dew point, wind speed, cloud cover, and UV index. Since our analysis would focus on Brooklyn’s Citi Bike’s only, we centered the weather requests on Brooklyn. In addition to these metrics, we chose to include, for each “hour” data point, the time-of-day (0-23) and the day-of-week (0-6). Although this weakens our claim that weather alone can predict bike-use, adding these features helps normalize against other aspects of the user’s decisions that aren’t affected by weather (i.e. is it Monday at 8 am and I need to get to work, or is it 4 am I’m sleeping and don’t need a bike no matter the weather).
+
+We produced the ride-count and weather data for each hour of 2014.  The decision was made to split the dataset into 4 “seasons”: Dec-Feb (Winter), Mar-May (Spring), Jun-Aug (Summer), and Sep-Nov (Fall). This again was useful for normalizing the weather to how humans more closely experience it; a cool day in October might still be bikeable (with an October jacket), but in the same temperature in August might have you hailing a taxi. Four separate models were trained on each of the three months of data, and were tested on 10% of each season (about 9 days). Of course, the test data was never used for training. The results of these tests are shown below for the “Spring” and “Fall” seasons.
+
+#### _Results_
+These two models performed with MSE scores of 1054 in Spring and 945 in Fall (mean residuals of 32.5 and 30.8 respectively). To better understand how significant the weather was in these estimations, we additionally trained another model on the same architecture and data, except removing weather metrics from the input. The time-of-day and day-of-week “baseline” performed much worse for both seasons: 4390 MSE in Spring and 2630 MSE in Fall (mean residuals of 66 and 51 respectively). This demonstrates that the weather has meaningful effects on the use of Citi Bikes.
+
+![visuals](assets/web_media/final_blog_post/predict_ridecount.png)
+
+Finally, we asked ourselves whether, with such a strong relationship between weather and bike rides, we might be able to estimate the hour’s UV-Index based on the number of rides. Once again, time-of-day and day-of-week were included in the input data, alongside the rides-per-hour. Using the same architecture as above, the model was trained along with the same seasonal splits in data. In this case, the Spring model obtained 0.481 MSE, while the Fall performed at 0.227 MSE. The test results are plotted below.
+
+![visuals](assets/web_media/final_blog_post/predict_weather.png)
+
+---
+
 # Blog Post 2
 _April 17, 2019_
 

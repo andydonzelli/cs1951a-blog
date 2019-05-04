@@ -31,7 +31,7 @@ c.execute(query_to_sort_and_get_weather_time)
 earliest_weather_time = float((c.fetchone())[0])
 latest_weather_time = float(((c.execute('SELECT unix_time from {table} ORDER BY unix_time DESC LIMIT 1'.format
                     (table=args.tname))).fetchone())[0])
-print(earliest_weather_time,latest_weather_time)
+# print(earliest_weather_time,latest_weather_time)
 
 #MODIFY EXISTING RIDE TABLE, ADD BIN_TIME COLUMN
 '''
