@@ -93,6 +93,8 @@ In order to filter out all the rides that did not start within any of the five N
 
 For integrating weather into our data (needed for the regression and machine learning analysis), we had to modify the rides data to be binned into hour groups and add another table detailing the weather statistics focusing on Brooklyn (since it had the most even distribution of the ride services) for each hour in the range of the rides data by using the Dark Sky Api and Python scripts.
 
+![visuals](assets/web_media/final_blog_post/processing.png)
+
 In order to create our final visualizations, we used [Seaborn](https://seaborn.pydata.org/) and [Matplotlib](https://matplotlib.org/) but heavily customized the appearance of the graphs to ensure consistency and a more modern design by removing excess line markers, customizing the font-appearance, etc.
 
 **Note**: All of our data manipulation scripts we used throughout the project are categorized into descriptive folder names and can be viewed [here](https://github.com/andydonzelli/cs1951a-blog/tree/master/not-website/scripts).
